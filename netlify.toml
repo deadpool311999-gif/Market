@@ -1,0 +1,10 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# Vite/React app: serve index.html for any path (safe even without a router)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
