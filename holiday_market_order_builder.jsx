@@ -123,7 +123,11 @@ function buildInitialValues(catalog) {
 function mergeValues(catalog, savedValues) {
   const base = buildInitialValues(catalog);
   if (!savedValues) return base;
-  return { ...base, ...savedValues };
+  const merged = { ...base };
+  Object.keys(base).forEach((key) => {
+    if (savedValues[key]) merged[key] = savedValues[key];
+  });
+  return merged;
 }
 
 function readSavedState() {
@@ -216,12 +220,19 @@ export default function App() {
   const [values, setValues] = useState(() => mergeValues(saved && saved.catalog ? saved.catalog : initialCatalog, saved ? saved.values : null));
   const [copied, setCopied] = useState(false);
   const [showAdd, setShowAdd] = useState(false);
+  const [showDelete, setShowDelete] = useState(false);
   const [newCompany, setNewCompany] = useState("");
   const [newTypeCompany, setNewTypeCompany] = useState("");
   const [newTypeName, setNewTypeName] = useState("");
   const [newItemCompany, setNewItemCompany] = useState("");
   const [newItemType, setNewItemType] = useState("Main");
   const [newItemName, setNewItemName] = useState("");
+  const [deleteCompanyName, setDeleteCompanyName] = useState("");
+  const [deleteTypeCompany, setDeleteTypeCompany] = useState("");
+  const [deleteTypeName, setDeleteTypeName] = useState("");
+  const [deleteItemCompany, setDeleteItemCompany] = useState("");
+  const [deleteItemType, setDeleteItemType] = useState("Main");
+  const [deleteItemName, setDeleteItemName] = useState("");
   const [saveMessage, setSaveMessage] = useState("Saved automatically");
 
   useEffect(() => {
@@ -308,6 +319,62 @@ export default function App() {
     setSaveMessage("Saved automatically");
   };
 
+  const deleteCompany = () => {
+    const name = deleteCompanyName.trim();
+    if (!name) return;
+    const nextCatalog = catalog.filter((company) => company.company !== name);
+    if (nextCatalog.length === catalog.length) return;
+    setCatalog(nextCatalog);
+    setValues((prev) => mergeValues(nextCatalog, prev));
+    setDeleteCompanyName("");
+    setSaveMessage("Saved automatically");
+  };
+
+  const deleteType = () => {
+    const companyName = deleteTypeCompany.trim();
+    const typeName = deleteTypeName.trim();
+    if (!companyName || !typeName) return;
+
+    const nextCatalog = catalog.map((company) => {
+      if (company.company !== companyName) return company;
+      return {
+        ...company,
+        groups: company.groups.filter((group) => group.type !== typeName),
+      };
+    });
+
+    setCatalog(nextCatalog);
+    setValues((prev) => mergeValues(nextCatalog, prev));
+    setDeleteTypeName("");
+    setSaveMessage("Saved automatically");
+  };
+
+  const deleteItem = () => {
+    const companyName = deleteItemCompany.trim();
+    const typeName = deleteItemType.trim();
+    const itemName = deleteItemName.trim();
+    if (!companyName || !typeName || !itemName) return;
+
+    const nextCatalog = catalog.map((company) => {
+      if (company.company !== companyName) return company;
+      return {
+        ...company,
+        groups: company.groups.map((group) => {
+          if (group.type !== typeName) return group;
+          return {
+            ...group,
+            items: group.items.filter((item) => item !== itemName),
+          };
+        }),
+      };
+    });
+
+    setCatalog(nextCatalog);
+    setValues((prev) => mergeValues(nextCatalog, prev));
+    setDeleteItemName("");
+    setSaveMessage("Saved automatically");
+  };
+
   const copyToClipboard = async () => {
     const text = outputPrompt || "No items selected.";
     try {
@@ -331,13 +398,28 @@ export default function App() {
                   Set quantities from 0 to 20. If quantity is 0, the item stays out. If quantity is above 0, it is included automatically.
                 </p>
               </div>
-              <button
-                type="button"
-                onClick={() => setShowAdd((prev) => !prev)}
-                className="rounded-2xl bg-black px-4 py-3 text-sm font-medium text-white"
-              >
-                {showAdd ? "Close add panel" : "Add company / type / item"}
-              </button>
+              <div className="flex flex-col gap-2 sm:flex-row">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowAdd((prev) => !prev);
+                    setShowDelete(false);
+                  }}
+                  className="rounded-2xl bg-black px-4 py-3 text-sm font-medium text-white"
+                >
+                  {showAdd ? "Close add panel" : "Add company / type / item"}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowDelete((prev) => !prev);
+                    setShowAdd(false);
+                  }}
+                  className="rounded-2xl border border-red-200 bg-white px-4 py-3 text-sm font-medium text-red-700"
+                >
+                  {showDelete ? "Close delete panel" : "Delete company / type / item"}
+                </button>
+              </div>
             </div>
 
             <div className="grid gap-3 md:grid-cols-3">
@@ -451,6 +533,135 @@ export default function App() {
                 />
                 <button type="button" onClick={addItem} className="mt-3 w-full rounded-xl bg-black px-3 py-2 text-sm text-white">
                   Add item
+                </button>
+              </div>
+            </div>
+          )}
+
+          {showDelete && (
+            <div className="mt-5 grid gap-4 rounded-2xl border border-red-200 p-4 md:grid-cols-3">
+              <div className="rounded-2xl border border-red-200 p-3">
+                <h2 className="mb-3 text-sm font-semibold text-red-700">Delete company</h2>
+                <select
+                  value={deleteCompanyName}
+                  onChange={(e) => setDeleteCompanyName(e.target.value)}
+                  className="w-full rounded-xl border border-gray-300 px-3 py-2 text-sm"
+                >
+                  <option value="">Select company</option>
+                  {catalog.map((company) => (
+                    <option key={company.company} value={company.company}>
+                      {company.company}
+                    </option>
+                  ))}
+                </select>
+                <button
+                  type="button"
+                  onClick={deleteCompany}
+                  className="mt-3 w-full rounded-xl bg-red-600 px-3 py-2 text-sm text-white"
+                >
+                  Delete company
+                </button>
+              </div>
+
+              <div className="rounded-2xl border border-red-200 p-3">
+                <h2 className="mb-3 text-sm font-semibold text-red-700">Delete type</h2>
+                <select
+                  value={deleteTypeCompany}
+                  onChange={(e) => {
+                    const companyName = e.target.value;
+                    setDeleteTypeCompany(companyName);
+                    const company = catalog.find((entry) => entry.company === companyName);
+                    setDeleteTypeName(company && company.groups && company.groups[0] ? company.groups[0].type : "");
+                  }}
+                  className="mb-2 w-full rounded-xl border border-gray-300 px-3 py-2 text-sm"
+                >
+                  <option value="">Select company</option>
+                  {catalog.map((company) => (
+                    <option key={company.company} value={company.company}>
+                      {company.company}
+                    </option>
+                  ))}
+                </select>
+                <select
+                  value={deleteTypeName}
+                  onChange={(e) => setDeleteTypeName(e.target.value)}
+                  className="w-full rounded-xl border border-gray-300 px-3 py-2 text-sm"
+                >
+                  <option value="">Select type</option>
+                  {(catalog.find((company) => company.company === deleteTypeCompany)?.groups || []).map((group) => (
+                    <option key={group.type} value={group.type}>
+                      {group.type}
+                    </option>
+                  ))}
+                </select>
+                <button
+                  type="button"
+                  onClick={deleteType}
+                  className="mt-3 w-full rounded-xl bg-red-600 px-3 py-2 text-sm text-white"
+                >
+                  Delete type
+                </button>
+              </div>
+
+              <div className="rounded-2xl border border-red-200 p-3">
+                <h2 className="mb-3 text-sm font-semibold text-red-700">Delete item</h2>
+                <select
+                  value={deleteItemCompany}
+                  onChange={(e) => {
+                    const companyName = e.target.value;
+                    setDeleteItemCompany(companyName);
+                    const company = catalog.find((entry) => entry.company === companyName);
+                    const firstType = company && company.groups && company.groups[0] ? company.groups[0].type : "Main";
+                    setDeleteItemType(firstType);
+                    setDeleteItemName("");
+                  }}
+                  className="mb-2 w-full rounded-xl border border-gray-300 px-3 py-2 text-sm"
+                >
+                  <option value="">Select company</option>
+                  {catalog.map((company) => (
+                    <option key={company.company} value={company.company}>
+                      {company.company}
+                    </option>
+                  ))}
+                </select>
+                <select
+                  value={deleteItemType}
+                  onChange={(e) => {
+                    setDeleteItemType(e.target.value);
+                    setDeleteItemName("");
+                  }}
+                  className="mb-2 w-full rounded-xl border border-gray-300 px-3 py-2 text-sm"
+                >
+                  {(catalog.find((company) => company.company === deleteItemCompany)?.groups || [{ type: "Main", items: [] }]).map(
+                    (group) => (
+                      <option key={group.type} value={group.type}>
+                        {group.type}
+                      </option>
+                    ),
+                  )}
+                </select>
+                <select
+                  value={deleteItemName}
+                  onChange={(e) => setDeleteItemName(e.target.value)}
+                  className="w-full rounded-xl border border-gray-300 px-3 py-2 text-sm"
+                >
+                  <option value="">Select item</option>
+                  {(
+                    catalog
+                      .find((company) => company.company === deleteItemCompany)
+                      ?.groups.find((group) => group.type === deleteItemType)?.items || []
+                  ).map((item) => (
+                    <option key={item} value={item}>
+                      {item}
+                    </option>
+                  ))}
+                </select>
+                <button
+                  type="button"
+                  onClick={deleteItem}
+                  className="mt-3 w-full rounded-xl bg-red-600 px-3 py-2 text-sm text-white"
+                >
+                  Delete item
                 </button>
               </div>
             </div>
