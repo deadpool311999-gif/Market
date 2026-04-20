@@ -8,114 +8,8 @@ const initialCatalog = [
     company: "Black and mild (5 pack)",
     groups: [
       {
-        type: "Black and mild (5 pack)",
-        items: [
-          "Jazz wood tip",
-          "Jazz plastic tip",
-          "Sweet filter tip",
-          "Original plastic tip",
-          "Original filter tip",
-        ],
-      },
-      {
-        type: "Black and mild (25 pack)",
-        items: ["Sweet wood tip", "Jazz plastic tip", "Casino plastic tip", "Sweet plastic tip"],
-      },
-      {
-        type: "Zig Zag Wraps (4 pack)",
-        items: ["Straight Up", "Sweet", "Green", "Blueberry", "Grape"],
-      },
-      {
-        type: "Hi-Fi",
-        items: ["Sweet", "Diamond"],
-      },
-      {
-        type: "Bluntville",
-        items: ["Triple Vanilla", "Palma Trio", "Pink Diva"],
-      },
-      {
-        type: "True Wraps",
-        items: ["Original", "Aromatic"],
-      },
-      {
-        type: "Backwoods (5 pack)",
-        items: ["Rum Cake", "Sweet Aromatic", "Russian Cream", "Banana", "Vanilla"],
-      },
-      {
-        type: "Dutch Masters",
-        items: ["Honey", "Berry Fusion", "Silver"],
-      },
-      {
-        type: "Swisher Sweets",
-        items: ["Original", "Grape", "Silver", "Diamond", "Green", "Cookies n Cream", "Mango", "Gold"],
-      },
-      {
-        type: "Swisher Minis",
-        items: ["Original", "Diamonds"],
-      },
-      {
-        type: "Swisher Leafs",
-        items: ["Original", "Honey", "Irish Cream", "Peach Brandy"],
-      },
-      {
-        type: "Swisher Leaf Wraps",
-        items: ["Original", "Irish Cream", "Peach Brandy"],
-      },
-      {
-        type: "White Owl",
-        items: ["Platinum", "Silver", "Red Sweets", "Green Sweets", "Black Sweets"],
-      },
-      {
-        type: "White Owl Minis",
-        items: ["Red Sweets", "Silver"],
-      },
-      {
-        type: "Game",
-        items: ["Natural Silver", "Diamond", "Red Sweets", "Black Sweets", "Grape", "Green", "Blue"],
-      },
-      {
-        type: "Game minis",
-        items: ["Diamond", "Black Sweets", "Blue", "Red Sweets"],
-      },
-      {
-        type: "Game Leaf",
-        items: ["White Russian", "Dark", "Natural"],
-      },
-      {
-        type: "SHOW",
-        items: ["White Grape", "Green", "Silver"],
-      },
-      {
-        type: "BLK",
-        items: ["Smooth", "Cream", "Cocoa", "Wine", "Berry", "Grape"],
-      },
-      {
-        type: "Other",
-        items: ["Red Supreme", "Taylors Pride", "Big Duke", "OGK wraps", "Top papers"],
-      },
-      {
-        type: "Raw papers",
-        items: ["Long", "Short", "Black"],
-      },
-      {
-        type: "Raw Cones",
-        items: ["6 pack", "3 pack"],
-      },
-      {
-        type: "JOB papers",
-        items: ["1.0", "1.5", "1.25"],
-      },
-      {
-        type: "Looseleaf wraps (2 pack)",
-        items: ["Cookies n Cream"],
-      },
-      {
-        type: "Slapwoods wraps (single pack)",
-        items: ["Cotton Candy", "Natural", "Sweet Aromatic"],
-      },
-      {
-        type: "Grabba Leaf",
-        items: ["Single", "Whole Leaf"],
+        type: "Main",
+        items: ["Jazz wood tip", "Jazz plastic tip", "Sweet filter tip", "Original plastic tip", "Original filter tip"],
       },
     ],
   },
@@ -197,8 +91,24 @@ const initialCatalog = [
     groups: [{ type: "Main", items: ["Smooth", "Cream", "Cocoa", "Wine", "Berry", "Grape"] }],
   },
   {
-    company: "Other",
-    groups: [{ type: "Main", items: ["Red Supreme", "Taylors Pride", "Big Duke", "OGK wraps", "Top papers"] }],
+    company: "Red Supreme",
+    groups: [{ type: "Main", items: ["Red Supreme"] }],
+  },
+  {
+    company: "Taylors Pride",
+    groups: [{ type: "Main", items: ["Taylors Pride"] }],
+  },
+  {
+    company: "Big Duke",
+    groups: [{ type: "Main", items: ["Big Duke"] }],
+  },
+  {
+    company: "OGK wraps",
+    groups: [{ type: "Main", items: ["OGK wraps"] }],
+  },
+  {
+    company: "Top papers",
+    groups: [{ type: "Main", items: ["Top papers"] }],
   },
   {
     company: "Raw papers",
