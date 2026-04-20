@@ -5,104 +5,158 @@ const QUANTITIES = Array.from({ length: 21 }, (_, i) => String(i));
 
 const initialCatalog = [
   {
-    company: "Game",
+    company: "Black and mild (5 pack)",
     groups: [
       {
         type: "Main",
         items: [
-          "Natural Silver",
-          "Diamond",
-          "Red Sweets",
-          "Black Sweets",
-          "Blue",
-          "Green",
-          "White Grape",
-          "Honey",
-          "Espresso Martini",
-          "Grape",
-          "Mango",
-          "Pineapple",
+          "Jazz wood tip",
+          "Jazz plastic tip",
+          "Sweet filter tip",
+          "Original plastic tip",
+          "Original filter tip",
         ],
-      },
-      {
-        type: "Leaf",
-        items: ["Natural", "Dark", "White Russian"],
-      },
-      {
-        type: "Game Minis",
-        items: ["Diamond", "Black Sweets", "Blue", "Red Sweets"],
       },
     ],
   },
   {
-    company: "BLK",
+    company: "Black and mild (25 pack)",
     groups: [
       {
         type: "Main",
-        items: ["Smooth", "Cream", "Wine", "Grape", "Cocoa", "Berry"],
+        items: ["Sweet wood tip", "Jazz plastic tip", "Casino plastic tip", "Sweet plastic tip"],
       },
     ],
+  },
+  {
+    company: "Zig Zag Wraps (4 pack)",
+    groups: [{ type: "Main", items: ["Straight Up", "Sweet", "Green", "Blueberry", "Grape"] }],
+  },
+  {
+    company: "Hi-Fi",
+    groups: [{ type: "Main", items: ["Sweet", "Diamond"] }],
+  },
+  {
+    company: "Bluntville",
+    groups: [{ type: "Main", items: ["Triple Vanilla", "Palma Trio", "Pink Diva"] }],
+  },
+  {
+    company: "True Wraps",
+    groups: [{ type: "Main", items: ["Original", "Aromatic"] }],
+  },
+  {
+    company: "Backwoods (5 pack)",
+    groups: [{ type: "Main", items: ["Rum Cake", "Sweet Aromatic", "Russian Cream", "Banana", "Vanilla"] }],
+  },
+  {
+    company: "Dutch Masters",
+    groups: [{ type: "Main", items: ["Honey", "Berry Fusion", "Silver"] }],
+  },
+  {
+    company: "Swisher Sweets",
+    groups: [{ type: "Main", items: ["Original", "Grape", "Silver", "Diamond", "Green", "Cookies n Cream", "Mango", "Gold"] }],
+  },
+  {
+    company: "Swisher Minis",
+    groups: [{ type: "Main", items: ["Original", "Diamonds"] }],
+  },
+  {
+    company: "Swisher Leafs",
+    groups: [{ type: "Main", items: ["Original", "Honey", "Irish Cream", "Peach Brandy"] }],
+  },
+  {
+    company: "Swisher Leaf Wraps",
+    groups: [{ type: "Main", items: ["Original", "Irish Cream", "Peach Brandy"] }],
   },
   {
     company: "White Owl",
-    groups: [
-      {
-        type: "Main",
-        items: [
-          "Silver",
-          "Platinum",
-          "Sweets",
-          "Green Sweets",
-          "Emerald",
-          "Black Sweets",
-          "White Grape",
-          "White Peach",
-          "White Russian",
-          "Swirl Triple Grape",
-          "Swirl Chocolate",
-          "Pineapple",
-          "Mango",
-          "Blue Raspberry",
-          "Strawberry",
-        ],
-      },
-      {
-        type: "White Owl Mini Cigarillos",
-        items: ["Sweets", "Silver"],
-      },
-    ],
+    groups: [{ type: "Main", items: ["Platinum", "Silver", "Red Sweets", "Green Sweets", "Black Sweets"] }],
   },
   {
-    company: "Swisher",
-    groups: [
-      {
-        type: "Main",
-        items: ["Original", "Diamonds", "Silver", "Green", "Grape", "Cookies n Cream", "Mango Blaze"],
-      },
-      {
-        type: "Swisher Mini Cigarillos",
-        items: ["Original", "Diamond"],
-      },
-      {
-        type: "Swisher Leaf",
-        items: ["Original", "Dark Stout", "Dark Leaf", "Aromatic", "Honey", "Irish Cream", "Peach Brandy", "Cognac"],
-      },
-      {
-        type: "Swisher Leaf Wraps",
-        items: ["Original", "Irish Cream", "Peach Brandy"],
-      },
-    ],
+    company: "White Owl Minis",
+    groups: [{ type: "Main", items: ["Red Sweets", "Silver"] }],
   },
   {
-    company: "Backwoods",
-    groups: [
-      {
-        type: "Main",
-        items: ["Russian Cream", "Sweet Aromatic", "Rum Cake", "Banana"],
-      },
-    ],
+    company: "Game",
+    groups: [{ type: "Main", items: ["Natural Silver", "Diamond", "Red Sweets", "Black Sweets", "Grape", "Green", "Blue"] }],
+  },
+  {
+    company: "Game minis",
+    groups: [{ type: "Main", items: ["Diamond", "Black Sweets", "Blue", "Red Sweets"] }],
+  },
+  {
+    company: "Game Leaf",
+    groups: [{ type: "Main", items: ["White Russian", "Dark", "Natural"] }],
+  },
+  {
+    company: "SHOW",
+    groups: [{ type: "Main", items: ["White Grape", "Green", "Silver"] }],
+  },
+  {
+    company: "BLK",
+    groups: [{ type: "Main", items: ["Smooth", "Cream", "Cocoa", "Wine", "Berry", "Grape"] }],
+  },
+  {
+    company: "Red Supreme",
+    groups: [{ type: "Main", items: ["Red Supreme"] }],
+  },
+  {
+    company: "Taylors Pride",
+    groups: [{ type: "Main", items: ["Taylors Pride"] }],
+  },
+  {
+    company: "Big Duke",
+    groups: [{ type: "Main", items: ["Big Duke"] }],
+  },
+  {
+    company: "OGK wraps",
+    groups: [{ type: "Main", items: ["OGK wraps"] }],
+  },
+  {
+    company: "Top papers",
+    groups: [{ type: "Main", items: ["Top papers"] }],
+  },
+  {
+    company: "Raw papers",
+    groups: [{ type: "Main", items: ["Long", "Short", "Black"] }],
+  },
+  {
+    company: "Raw Cones",
+    groups: [{ type: "Main", items: ["6 pack", "3 pack"] }],
+  },
+  {
+    company: "JOB papers",
+    groups: [{ type: "Main", items: ["1.0", "1.5", "1.25"] }],
+  },
+  {
+    company: "Looseleaf wraps(2 pack)",
+    groups: [{ type: "Main", items: ["Cookies n Cream"] }],
+  },
+  {
+    company: "Slapwoods wraps(single pack)",
+    groups: [{ type: "Main", items: ["Cotton Candy", "Natural", "Sweet Aromatic"] }],
+  },
+  {
+    company: "Grabba Leaf",
+    groups: [{ type: "Main", items: ["Single", "Whole Leaf"] }],
+  },
+  {
+    company: "Seneca",
+    groups: [{ type: "Main", items: ["Menthol 100s", "Menthol King", "Red 100s", "Red King", "Blue 100s"] }],
+  },
+  {
+    company: "24/7",
+    groups: [{ type: "Main", items: ["Menthol 100s", "Menthol King", "Red 100s", "Red King"] }],
+  },
+  {
+    company: "Wildhorse",
+    groups: [{ type: "Main", items: ["Menthol 100s", "Red 100s"] }],
   },
 ];
+
+const DEFAULT_QUANTITIES = {
+  [keyFor("Hi-Fi", "Main", "Sweet")]: "2",
+};
 
 function keyFor(company, type, item) {
   return `${company}__${type}__${item}`;
@@ -113,7 +167,8 @@ function buildInitialValues(catalog) {
   catalog.forEach((company) => {
     company.groups.forEach((group) => {
       group.items.forEach((item) => {
-        initial[keyFor(company.company, group.type, item)] = { quantity: "0" };
+        const key = keyFor(company.company, group.type, item);
+        initial[key] = { quantity: DEFAULT_QUANTITIES[key] ?? "0" };
       });
     });
   });
